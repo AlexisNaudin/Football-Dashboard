@@ -1,0 +1,106 @@
+body{
+    background-color: black;
+    color: whitesmoke;
+    font-family: Georgia, 'Roboto', sans-serif;
+    font-size: small;
+    }
+
+#Container{
+    padding: 0%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1300px;
+    height: 600px;
+    overflow: hidden;
+}
+
+#Left{
+    width: 700px;
+    height: 600px;
+    float: left;
+    border-right: thin solid whitesmoke; 
+    position: relative;
+}
+
+#Right{
+    /* padding: 0px 5px 10px 5px; top right bottom left*/ 
+    padding: 0%;
+    width: 590px;
+    height: 600px;
+    /* float: right; */
+    background-color: teal;
+    /* position: relative; */
+    overflow: hidden;;
+    }
+
+
+#Info{
+    margin: auto;
+    width: 560px;
+    height: 550px;
+    position:absolute; right:0
+}
+
+#Result_freq{
+    width: 400px;
+    height: 100px;
+    outline: whitesmoke solid thin;
+    cursor: pointer;
+    background-color: tomato;
+}
+
+#Navigation{
+    width: 100px;
+    float: left;
+    /* background-color: #242424; */
+    height: 500px;
+    border-right: thin solid whitesmoke; 
+    line-height: 1.8;
+}
+
+.text{
+    padding: 0% 0% 0% 5%;
+    margin: 2%;
+}
+
+.Selected{
+    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
+    color: whitesmoke;
+    }
+
+#Navigation ul{
+    list-style-type: none;
+    padding: 5%;
+}
+
+
+#Chart1{
+    border-left: thin solid whitesmoke;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:530px;
+    /* float: right; */
+}
+
+#Chart2{
+    width:530px;
+    /* float: right; */
+    clear: right;
+    background-color: thistle;
+}
+
+#Header{
+    /*background-color: #434652; */
+    color: whitesmoke;
+    text-align: center;
+    width: 650px;
+    height: 50px;
+    padding: 0%;
+    margin: 0%;
+}
+
