@@ -74,12 +74,12 @@ $.get("/data", function(data, status){
     
     // body corresponds to the parent. Can be changed for a given div (?)
     // var myParent = document.body;
-    var myParent = document.getElementById("dropdowntest");
+    var myParent = document.getElementById("dropdown");
     // Create data = list of groups
     // var Division = ["E0", "E1", "L1"]
     //Create and append select list
-    var title1 = document.createElement("h3");
-    title1.innerHTML = "Test for navigation dropdown list"
+    var title1 = document.createElement("h4");
+    title1.innerHTML = "Championship"
     myParent.appendChild(title1);
     var selectList = document.createElement("select");
     selectList.id = "mylist1";
@@ -88,7 +88,7 @@ $.get("/data", function(data, status){
     myParent.appendChild(selectList);
 
     var title2 = document.createElement("h4");
-    title2.innerHTML = "Division"
+    title2.innerHTML = "Season"
     myParent.appendChild(title2);
     var selectList2 = document.createElement("select");
     selectList2.id = "mylist2";
@@ -183,7 +183,7 @@ function updateChart(mySeason, myTeam) {
         count = 0
         var obj = {};
         data = data.filter(x => x.Season === mySeason && x.HomeTeam === myTeam);
-        obj.bindto="#chart";
+        obj.bindto="#Chart1";
         obj.data = {};
         obj.data.columns = [];
         var axis = [];

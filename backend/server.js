@@ -41,7 +41,7 @@ app.get('/*', function(req, res){
         res.end();
         return;
       }
-  if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+  if (fs.statSync(filename).isDirectory()) filename += '/index2.html';
   fs.readFile(filename, "binary", function (err, file) {
       if (err) {
           res.writeHead(500, {

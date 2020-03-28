@@ -2,8 +2,15 @@
 <html>
     <head>
         <title> Dashboard Layout </title>
-        <link rel = "stylesheet" type = text/css  href = "dashboard_layout.css" />
+        <link rel = "stylesheet" type = text/css  href = "./frontend/dashboard_layout.css" />
         <link href="https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
+        <link href="./node_modules/c3/c3.css" rel="stylesheet">
+        <script src="./node_modules/d3/dist/d3.min.js" charset="utf-8"></script>
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="./node_modules/c3/c3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.0.0.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>     
     </head>
     <body>
         <div id = "Container">
@@ -14,18 +21,8 @@
                 </div>
                 <div id = "Navigation">
                   <h3 class="text">Navigation</h3>
-                    <ul>
-                        <li><a class ="Selcted" href="">Championship</a></li>
-                        <li><a class ="Selcted" href="">Season</a></li>
-                        <li><a class ="Selcted" href="">Team</a></li>
-                    </ul>
-                    <div id="dropdown">
-                        <select id="mylist">
-                            <option>Championship</option>
-                            <option>Ligue 1</option>
-                            <option>Premier League</option>
-                            <option>Serie A</option>
-                        </select>
+                    <div id = "dropdown">
+
                     </div>
                         <button>Team</button>
                 </div>
@@ -39,39 +36,20 @@
                 </div>
             </div>
             <div id = "Right">
-                <p class="text">WHERE ARE U?</p>
                 <div id = "Chart1"> 
-                    <select id="editable-select">
-                        <option>Alfa Romeo</option>
-                        <option>Audi</option>
-                        <option>BMW</option>
-                        <option>Citroen</option>
-                    </select>
+         
                 </div>
                 <div id = "Chart2"> 
-                    <h3>Test for navigation dropdown list</h3>
-                    <select id="mylist2", name="mylist2", onchange="populate(this.id, 'mylist3')">
-                        <option value=""></option>
-                        <option value="Ligue 1">Ligue 1</option>
-                        <option value="Premier League">Premier League</option>
-                    </select>
-                    </hr>
-                    <h3>Choose season</h3>
-                    <select id="mylist3", name="mylist3", onchange="populate2(this.id, 'mylist4')">
-                    </select>
-                    </hr>
-                    <h4>Choose your team</h4>
-                    <select id="mylist4", name="mylist4"></select>
+
 
                 </div>
             </div>
         </div>
 
     </body>
+
+    <script src="./frontend/myScript.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
-    <script src="./test.js"></script>
     <script>
         $('#editable-select').editableSelect();
 
