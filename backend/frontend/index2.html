@@ -2,45 +2,57 @@
 <html>
     <head>
         <title> Dashboard Layout </title>
-        <link rel = "stylesheet" type = text/css  href = "./frontend/dashboard_layout.css" />
         <link href="https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
-        <link href="./node_modules/c3/c3.css" rel="stylesheet">
-        <script src="./node_modules/d3/dist/d3.min.js" charset="utf-8"></script>
-        <script src="https://d3js.org/d3.v4.js"></script>
-        <script src="./node_modules/c3/c3.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.0.0.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>     
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.css" integrity="sha256-6keM3+sDUFwuiB+tXRq/HV8tqQYlvarrsoWkx53dSgY=" crossorigin="anonymous" />
+        <link rel = "stylesheet" type = text/css  href = "./frontend/dashboard_layout.css" />
+
     </head>
     <body>
         <div id = "Container">
             <div id = "Left">
                 <div id = "Header">
-                    <h1>TEAM - Ranking</h1>
+                    <h3>TEAM - Ranking</h1>
                     <hr />
                 </div>
                 <div id = "Navigation">
-                  <h3 class="text">Navigation</h3>
-                    <div id = "dropdown">
-
+                    <div id = "dropdown" class = dropdown>
+                                          
                     </div>
-                        <button>Team</button>
-                </div>
-                <div class="text" id = "Info">
-                    <h2 class="text">Statistics</h2>
-                    <div id="Result_freq">
+                </div> 
 
+                <div class="text" id = "Info">
+                    <h4 class="text">Statistics</h2>
+                    <div id="Result_freq">
+                        <div id="Wins" class="Result_box">
+                            <h5>Wins</h5>
+                            <p>5</p>
+                            <p>25%</p>
+                        </div>
+                        <div id="Draws" class="Result_box">
+                            <h5>Draws</h5>
+                            <p>10</p>
+                            <p>50%</p>
+                        </div>
+                        <div id="Losses" class="Result_box">
+                            <h5>Losses</h5>
+                            <p>5</p>
+                            <p>25%</p>
+                        </div>
+                    </div>
+                    <div id="Shots">
+                        <p class="text">Average/Total shots (on target) this season/last 10 matches</p>
                     </div>
                     <p class="text">Number of wins/draw/losses in the last 10 matches</p>
-                    <p class="text">Average/Total shots (on target) this season/last 10 matches</p>
+                    
                 </div>
             </div>
+
             <div id = "Right">
                 <div id = "Chart1"> 
          
                 </div>
                 <div id = "Chart2"> 
-
 
                 </div>
             </div>
@@ -48,10 +60,22 @@
 
     </body>
 
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
+
+    <!-- C3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js" integrity="sha256-c8Se556pPduNURww1xPQduyWV1LI/ARRt61o6LQreGw=" crossorigin="anonymous"></script>
+
+
     <script src="./frontend/myScript.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-        $('#editable-select').editableSelect();
+       // $('#editable-select').editableSelect();
 
     </script>
 </html>
