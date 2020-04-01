@@ -9,7 +9,7 @@ const req = require("request")
 
 
 app.get('/data', function (req, res) {
-  fs.readFile('./CleanDB.csv', async (err, data) => {
+  fs.readFile('./Teams_Result_DB.csv', async (err, data) => {
     if (err) {
       console.error(err)
       return
@@ -18,15 +18,6 @@ app.get('/data', function (req, res) {
   })
 })
 
-app.get('/data2', function (req, res) {
-  fs.readFile('./CleanDB2.csv', async (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    res.send(await neatCsv(data))
-  })
-})
 
 app.get('/*', function(req, res){
   var filename;

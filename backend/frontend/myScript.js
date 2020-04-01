@@ -8,13 +8,13 @@ $.get("/data", function(data, status){
     var axis = [];
     console.log(data);
     for(var i=0; i<data.length; i++){
-     var count = findItem(axis, data[i].HomeTeam);
+     var count = findItem(axis, data[i].Team);
      if(obj.data.columns[count]===undefined){
         obj.data.columns[count] = [];
-        obj.data.columns[count].push(data[i].HomeTeam);
-        obj.data.columns[count].push(data[i].HomeTeamRank);
+        obj.data.columns[count].push(data[i].Team);
+        obj.data.columns[count].push(data[i].ranking);
      }else{
-        obj.data.columns[count].push(data[i].HomeTeamRank);
+        obj.data.columns[count].push(data[i].ranking);
      }
     }
     var chart = c3.generate(obj);
@@ -39,7 +39,6 @@ $.get("/data", function(data, status){
     Division.unshift("");
     */
     
-    // subset of the data keeping only properties Div, Season and HomeTeam of objects in
     // array "data" that will be used for the dropdown selection.
     var subdata = data
     
@@ -63,7 +62,7 @@ $.get("/data", function(data, status){
         seasons.forEach(function(element2){ // for each season in data subset
                 // select given division and given season:
                 tempdata = subdata.filter(x => x.Div === element && x.Season === element2); 
-                teams_season[element2] = [...new Set(tempdata.map(item => item.HomeTeam))];   
+                teams_season[element2] = [...new Set(tempdata.map(item => item.Team))];   
             
         })
 
@@ -268,7 +267,7 @@ function updateChart(mySeason, myTeam) {
         gCount = 0
         count = 0
         var obj = {};
-        data = data.filter(x => x.Season === mySeason && x.HomeTeam === myTeam);
+        data = data.filter(x => x.Season === mySeason && x.Team === myTeam);
         obj.bindto="#Chart1";
         obj.data = {};
         obj.data.columns = [];
@@ -280,14 +279,14 @@ function updateChart(mySeason, myTeam) {
         var axis = [];
         console.log(data);
         for(var i=0; i<data.length; i++){
-         var count = findItem(axis, data[i].HomeTeam);
+         var count = findItem(axis, data[i].Team);
          if(obj.data.columns[count]===undefined){
             obj.data.columns[count] = [];
-            obj.data.columns[count].push(data[i].HomeTeam);
-            obj.data.columns[count].push(data[i].HomeTeamRank);
+            obj.data.columns[count].push(data[i].Team);
+            obj.data.columns[count].push(data[i].ranking);
 
          }else{
-            obj.data.columns[count].push(data[i].HomeTeamRank);
+            obj.data.columns[count].push(data[i].ranking);
          }
         }
         var chart = c3.generate(obj);
