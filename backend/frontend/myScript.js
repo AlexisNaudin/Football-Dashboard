@@ -25,7 +25,7 @@ $.get("/data", function(data, status){
 var teams_div_season = [];
 $.get("/data", function(data, status){
     
-    var Division = [""];
+    var Division = [];
         for(var i=0; i<data.length; i++){
             // If element does not exist, add it to the array
             if(Division.indexOf(data[i]["Div"]) === -1){
@@ -66,10 +66,10 @@ $.get("/data", function(data, status){
             
         })
 
-        seasons.forEach(function(element2){
+        /*seasons.forEach(function(element2){
             teams_season[element2].unshift("Choose a team");  
         
-        })
+        })*/
         // add temorary array "teams_season" containing teams of given division and season 
         // to "teams_div_season" for each division "element":
         teams_div_season[element] =  teams_season
@@ -78,12 +78,12 @@ $.get("/data", function(data, status){
     // body corresponds to the parent. Can be changed for a given div (?)
     // var myParent = document.body;
     var myParent = document.getElementById("dropdown");
+    var selectList = document.getElementById("mylist1");
     // Create data = list of groups
-    // var Division = ["E0", "E1", "L1"]
     //Create and append select list
-    var title1 = document.createElement("h6");
-    title1.className = "Nav_titles"
-    title1.innerHTML = "Championship"
+    /*var title1 = document.createElement("h6");
+    title1.className = "Nav_titles";
+    title1.innerHTML = "Championship";
     myParent.appendChild(title1);
     var selectList = document.createElement("select");
     selectList.id = "mylist1";
@@ -93,28 +93,31 @@ $.get("/data", function(data, status){
     myParent.appendChild(selectList); 
 
     var title2 = document.createElement("h6");
-    title2.className = "Nav_titles"
-    title2.innerHTML = "Season"
+    title2.className = "Nav_titles";
+    title2.innerHTML = "Season";
     myParent.appendChild(title2);
     var selectList2 = document.createElement("select");
     selectList2.id = "mylist2";
     selectList2.name = "mylist2";
     selectList2.className = "dropdowns";
     selectList2.setAttribute("onchange", "populate2('mylist1', this.id, 'mylist3')");
-    myParent.appendChild(selectList2);
+    myParent.appendChild(selectList2);*/
     
-    var title3 = document.createElement("h6");
-    title3.className = "Nav_titles"
-    title3.innerHTML = "Team"
+    /*var title3 = document.createElement("h6");
+    title3.className = "Nav_titles";
+    title3.innerHTML = "Team";
     myParent.appendChild(title3);
     var selectList3 = document.createElement("select");
     selectList3.id = "mylist3";
     selectList3.name = "mylist3";
     selectList3.className = "dropdowns";
-    selectList3.setAttribute("onchange", "updateChart('mylist2', this.id)");
-    myParent.appendChild(selectList3);
+    selectList3.setAttribute("onchange", "updateData('mylist2', this.id)");
+    myParent.appendChild(selectList3);*/
 
-
+    var option1 = document.createElement("option");
+    option1.value = "Choose a League";
+    option1.text = "Choose a League";
+    selectList.appendChild(option1);
     //Create and append the options
     for (var i = 0; i < Object.keys(teams_div_season).length; i++) {
         var option = document.createElement("option");
@@ -215,7 +218,12 @@ function populate(l1, l2){
             optionArray = optionArr.map((e) => e + "|" + e);
         } 
     });
-        
+    
+    var option2 = document.createElement("option");
+    option2.value = "Choose a Season";
+    option2.text = "Choose a Season";
+    l2.options.add(option2);
+
     for(var option in optionArray){
         var pair = optionArray[option].split("|");
         var newOption = document.createElement("option"); /* createElement is creating a new HTML element
@@ -248,6 +256,11 @@ function populate2(l1, l2, l3){
         } 
     });
         
+    var option3 = document.createElement("option");
+    option3.value = "Choose a Team";
+    option3.text = "Choose a Team";
+    l3.options.add(option3);
+
     for(var option in optionArray2){
         var pair = optionArray2[option].split("|");
         var newOption = document.createElement("option"); /* createElement is creating a new HTML element
@@ -259,15 +272,36 @@ function populate2(l1, l2, l3){
 }
 
 
-function updateChart(mySeason, myTeam) {
+function updateData(mySeason, myTeam) {
     var mySeason = document.getElementById(mySeason).value;
     var myTeam = document.getElementById(myTeam).value;
 
+    var Team_rank = [];
+    var Results = [];
+
     $.get("/data", function(data, status){
+        data = data.filter(x => x.Team === myTeam);
+        Team_rank = data[data.length-1]["ranking"];
+
+        data = data.filter(x => x.Season === mySeason);
+
+        countWins = 0;
+        countDraws = 0;
+        countLosses = 0;
+        for(var i=0; i<data.length; i++){
+            Results.push(data[i]["Outcome"])
+            if(data[i]["Outcome"] == "Win"){
+                countWins++;
+            } else if (data[i]["Outcome"] == "Draw") {
+                countDraws++;
+            } else if (data[i]["Outcome"] == "Loss"){
+                countLosses++;
+            }
+        }
+         
         gCount = 0
         count = 0
         var obj = {};
-        data = data.filter(x => x.Season === mySeason && x.Team === myTeam);
         obj.bindto="#Chart1";
         obj.data = {};
         obj.data.columns = [];
@@ -290,7 +324,45 @@ function updateChart(mySeason, myTeam) {
          }
         }
         var chart = c3.generate(obj);
+
+        Team_ranking = document.getElementById("Team_Rank");
+
+        if(Team_rank == 1 || Team_rank == 21){
+            Team_ranking.innerHTML = Team_rank + "<sup>st</sup>";
+        } else if (Team_rank == 2 || Team_rank == 22){
+            Team_ranking.innerHTML = Team_rank + "<sup>nd</sup>";
+        } else if (Team_rank == 3 || Team_rank == 23){
+            Team_ranking.innerHTML = Team_rank + "<sup>rd</sup>";
+        } else {
+            Team_ranking.innerHTML = Team_rank + "<sup>th</sup>";
+        }
+        
+        document.getElementById("Team_Ranking").appendChild(Team_ranking);
+
+        nb_wins = document.getElementById("nbWins");
+        pct_wins = document.getElementById("pctWins");
+        nb_wins.innerHTML = countWins;
+        pct_wins.innerHTML = "(" + Math.round((countWins/data.length)*1000)/10 + "% )";
+        document.getElementById("Wins").appendChild(nb_wins);
+        document.getElementById("Wins").appendChild(pct_wins);
+        nb_draws = document.getElementById("nbDraws");
+        pct_draws = document.getElementById("pctDraws");
+        nb_draws.innerHTML = countDraws;
+        pct_draws.innerHTML = "(" + Math.round((countDraws/data.length)*1000)/10 + "% )";
+        document.getElementById("Draws").appendChild(nb_draws);
+        document.getElementById("Draws").appendChild(pct_draws);
+        nb_losses = document.getElementById("nbLosses");
+        pct_losses = document.getElementById("pctLosses");
+        nb_losses.innerHTML = countLosses;
+        pct_losses.innerHTML = "(" + Math.round((countLosses/data.length)*1000)/10 + "% )";
+        document.getElementById("Losses").appendChild(nb_losses);
+        document.getElementById("Losses").appendChild(pct_losses);
     });
+    
+    Team_header = document.getElementById("Team_Name");
+    Team_header.innerHTML = document.getElementById("mylist3").value;
+    document.getElementById("Team_header").appendChild(Team_header);
+    
 }
 
 function findItem(axis, item){

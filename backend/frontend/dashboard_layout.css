@@ -1,18 +1,68 @@
 body{
     background-color:#181818;
-    color: whitesmoke;
+    color: white;
     font-family: Georgia, 'Roboto', sans-serif;
     font-size: small;
     }
+
+#Left{
+    width: 700px;
+    height: 600px;
+    float: left;
+    border-right: thin solid whitesmoke; 
+    position: relative;
+}
 
 #Header{
     /*background-color: #434652; */
     color: white;
     text-align: center;
     width: 650px;
-    height: 50px;
+    height: 75px;
     padding: 0%;
     margin: 0%;
+}
+
+#Team_header{
+    width: 450px;
+    height: 65px;
+    padding: 2% 0% 0% 0%;
+    float: left;
+    margin-top: 10px;
+}
+
+#Team_Ranking{
+    width: 180px;
+    height: 65px;
+    padding: 2% 0% 0% 0%;
+    float: left;
+    position: relative;
+    border-radius: .5em;
+    /*background-color: #4d4d4d;*/
+    background-color: white;
+    border-color: #181818;
+    color: #181818;;
+    margin: 10px 0px 0px 20px;
+}
+
+#Team_Ranking p{
+  margin:0;
+  padding: 4px 0px 0px 13px;
+  position:absolute;
+  left:0;
+  top: 0;
+}
+
+#Team_Ranking h3{
+    bottom: 0;
+    position: absolute;
+    left: 40%;
+  }
+
+#List_icon{
+    position:absolute;
+    right:0;
+    padding: 5px 10px 8px 0px;
 }
 
 #Container{
@@ -22,14 +72,6 @@ body{
     width: 1300px;
     height: 600px;
     overflow: hidden;
-}
-
-#Left{
-    width: 700px;
-    height: 600px;
-    float: left;
-    border-right: thin solid whitesmoke; 
-    position: relative;
 }
 
 #Right{
@@ -46,7 +88,7 @@ body{
 #Info{
     margin: auto;
     width: 500px;
-    height: 550px;
+    height: 540px;
     position:absolute; right:0
 }
 
@@ -54,7 +96,15 @@ body{
     width: 420px;
     height: 140px;
     border: white;
-    cursor: pointer;
+    /*cursor: pointer;*/
+    border-radius: .5em;
+    background-color: #2e2e2e;
+}
+
+#Stats{
+    margin-top: 10px;
+    width: 420px;
+    height: 340px;
     border-radius: .5em;
     background-color: #2e2e2e;
 }
@@ -85,7 +135,38 @@ body{
     background-color: #d63727;
 }
 
-#Shots{
+.Stats_box{
+    padding: 5px;
+    border-radius: .5em;
+    width: 190px;
+    height: 90px;
+    float: left;
+    margin: 10px;
+    color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+}
+
+.small_box{
+    padding: 5px;
+    border-radius: .5em;
+    width: 120px;
+    height: 80px;
+    float: left;
+    margin: 10px;
+    color: #181818;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+}
+
+
+/*#Shots{
     margin: 15px 0px 15px 0px;
     height: 30px;
     width: 420px;
@@ -96,13 +177,13 @@ body{
     flex-direction: column;
     justify-content: center;
     text-align: center;
-}
+}*/
 
 #Navigation{
     width: 200px;
     float: left;
     /* background-color: #242424; */
-    height: 500px; 
+    height: 490px; 
     line-height: 1.8;
 }
 
