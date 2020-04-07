@@ -92,6 +92,14 @@ body{
     position:absolute; right:0
 }
 
+#Last_results{
+    width: 420px;
+    height: 70px;
+    margin: 10px 0px 10px 0px;
+    border-radius: .3em;
+    background-color: #2e2e2e
+}
+
 #Result_freq{
     width: 420px;
     height: 140px;
@@ -104,7 +112,7 @@ body{
 #Stats{
     margin-top: 10px;
     width: 420px;
-    height: 340px;
+    height: 310px;
     border-radius: .5em;
     background-color: #2e2e2e;
 }
@@ -139,24 +147,28 @@ body{
     padding: 5px;
     border-radius: .5em;
     width: 190px;
-    height: 90px;
+    height: 85px;
     float: left;
-    margin: 10px;
+    margin: 8px;
     color: #181818;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     background-color: white;
+}
+
+.Stats_box h6 {
+    font-size: 15px;
 }
 
 .small_box{
     padding: 5px;
     border-radius: .5em;
     width: 120px;
-    height: 80px;
+    height: 65px;
     float: left;
-    margin: 10px;
+    margin: 8px;
     color: #181818;
     display: flex;
     flex-direction: column;
@@ -165,6 +177,9 @@ body{
     background-color: white;
 }
 
+.small_box h6 {
+    font-size: 14px;
+}
 
 /*#Shots{
     margin: 15px 0px 15px 0px;
@@ -227,10 +242,8 @@ a{
 
 
 #Chart1{
-    border-left: thin solid whitesmoke;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 8px 10px 8px 10px;
     width:530px;
     /* float: right; */
 }
@@ -246,28 +259,32 @@ path.domain { stroke: white; }
     font-size:12px;
  }
 
+ .c3-title {
+    fill:white;
+    font-size:15px;
+ }
+
 .c3 .c3-axis-x path, .c3 .c3-axis-x line {
     /*stroke: white;*/
-    stroke: none; - hides axis
+    stroke: none; /* hides axis */
     }
 .c3 .c3-axis-y path, .c3 .c3-axis-y line {
     /*stroke: white;*/
-    stroke: none; - hides axis
+    stroke: none; /* hides axis */
     }
 
 .c3-tooltip td {
     font-size:13px;
-padding: 3px 6px;
-background-color:#fff;
-border-left:1px dotted #292929;
-color: #181818;
+    padding: 3px 6px;
+    background-color:#fff;
+    border-left:1px dotted #292929;
+    color: #181818;
     }
 
 #Chart2{
     width:530px;
     /* float: right; */
     clear: right;
-    background-color: white;
 }
 
 

@@ -16,7 +16,7 @@
                         <h2 id = "Team_Name"></h2>
                     </div>
                     <div id = "Team_Ranking">
-                        <p>Current Ranking</p>
+                        <p>Ranking</p>
                         <h3 id = "Team_Rank"></h3>
                         <svg id = "List_icon" class="bi bi-list-ol" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M5 11.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
@@ -44,7 +44,9 @@
                 </div> 
 
                 <div class="text" id = "Info">
-                    <h4 class="text">Statistics</h2>
+                    <div id="Last_results">
+
+                    </div>
                     <div id="Result_freq">
                         <div id="Wins" class="Result_box">
                             <h6>Wins</h6>
@@ -66,29 +68,36 @@
                     <div id = "Stats">
                         <div id = "Goals">
                             <div id="Goals_scored" class="Stats_box">
-
+                                <h6>Goals Scored</h6>
+                                <h4 id = "nb_Goals_scored"></h4>
                             </div>
                             <div id="Goals_conceeded" class="Stats_box">
-
+                                <h6>Goals Conceeded</h6>
+                                <h4 id = "nb_Goals_conceeded"></h4>
                             </div>
                         </div>
                         <div id = "Shots">
                             <div id="Avg_shots" class="Stats_box">
-
+                                <h6>Average Shots per Game</h6>
+                                <h4 id = "Avg_shots_per_game"></h4>
                             </div>
                             <div id="Avg_shots_target" class="Stats_box">
-
+                                <h6>Average Shots on Target per Game</h6>
+                                <h4 id = "Avg_shots_target_per_game"></h4>
                             </div>
                         </div>
                         <div id = "additional_stats">
                             <div id="Corners" class="small_box">
-
+                                <h6>Average Corners</h6>
+                                <h5 id = "Avg_corner_per_game"></h5>
                             </div>
                             <div id="Yellow_cards" class="small_box">
-
+                                <h6>Yellow cards</h6>
+                                <h5 id = "nbYellow"></h5>
                             </div>
                             <div id="Red_cards" class="small_box">
-
+                                <h6>Red cards</h6>
+                                <h5 id = "nbRed"></h5>
                             </div>
                         </div>
                     </div>
