@@ -213,12 +213,15 @@ function updateData(mySeason, myTeam) {
     const y = d3.scaleLinear()
     .range([height, 0]);
     
+    d3.select("#Chart2").select("svg").remove(); 
     const svg = d3.select("#Chart2").append("svg")
     .attr("id", "svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    
     
     const div = d3.select("body").append("div")
     .attr("class", "tooltip")         
@@ -232,6 +235,31 @@ function updateData(mySeason, myTeam) {
         data = data.filter(x => x.Team === myTeam && x.Season === mySeason);
         Team_rank = data[data.length-1]["ranking"];
 
+
+        // Last Results
+        var lastResult = ["Res1", "Res2", "Res3", "Res4", "Res5", "Res6"];
+        lastResult.forEach(function(Res, index){
+            if(data[data.length -1 -index] == undefined){
+                document.getElementById(Res).innerHTML = "NA";
+                document.getElementById(Res).className = "ResNA";
+            } else {
+                if(data[data.length -1 -index]["Outcome"] == "Win"){
+                    document.getElementById(Res).innerHTML = "W";
+                    document.getElementById(Res).className = "ResW";
+                } else if (data[data.length -1 -index]["Outcome"] == "Draw") {
+                    document.getElementById(Res).innerHTML = "D";
+                    document.getElementById(Res).className = "ResD";
+                } else if (data[data.length -1 -index]["Outcome"] == "Loss"){
+                    document.getElementById(Res).innerHTML = "L";
+                    document.getElementById(Res).className = "ResL";
+                } else {
+                    document.getElementById(Res).innerHTML = "NA";
+                    document.getElementById(Res).className = "ResNA";
+                }
+            }  
+        });
+        
+        // Wins, draws and losses frequencies
         countWins = 0;
         countDraws = 0;
         countLosses = 0;
@@ -246,6 +274,7 @@ function updateData(mySeason, myTeam) {
             }
         }
 
+        // Statistics
         Shots = 0;
         countShots = 0;
         Shots_target = 0;
@@ -440,12 +469,12 @@ function updateData(mySeason, myTeam) {
             // Selection des noeuds text, positionnement puis rotation
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x).tickSize(0))
+                .call(d3.axisBottom(x).tickSize(0).tickValues(x.domain().filter((d, i) => d % 5 === 0)))
                 .selectAll("text")	
                     .style("text-anchor", "end")
-                    .attr("dx", "-.8em")
-                    .attr("dy", ".15em")
-                    .attr("transform", "rotate(-65)");
+                    .attr("dy", ".8em")
+                    //.attr("dx", "-.8em")
+                    //.attr("transform", "rotate(-65)");
             
             // Ajout de l'axe Y au SVG avec 6 éléments de légende en utilisant la fonction ticks (sinon D3JS en place autant qu'il peut).
             svg.append("g")
