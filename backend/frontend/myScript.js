@@ -1,26 +1,4 @@
 var gCount = 0
-/*
-$.get("/data", function(data, status){
-    var obj = {};
-    obj.bindto="#chart";
-    obj.data = {};
-    obj.data.columns = [];
-    var axis = [];
-    console.log(data);
-    for(var i=0; i<data.length; i++){
-     var count = findItem(axis, data[i].Team);
-     if(obj.data.columns[count]===undefined){
-        obj.data.columns[count] = [];
-        obj.data.columns[count].push(data[i].Team);
-        obj.data.columns[count].push(data[i].ranking);
-     }else{
-        obj.data.columns[count].push(data[i].ranking);
-     }
-    }
-    var chart = c3.generate(obj);
-});
-*/
-
 
 var teams_div_season = [];
 $.get("/data", function(data, status){
@@ -66,10 +44,6 @@ $.get("/data", function(data, status){
             
         })
 
-        /*seasons.forEach(function(element2){
-            teams_season[element2].unshift("Choose a team");  
-        
-        })*/
         // add temorary array "teams_season" containing teams of given division and season 
         // to "teams_div_season" for each division "element":
         teams_div_season[element] =  teams_season
@@ -79,40 +53,6 @@ $.get("/data", function(data, status){
     // var myParent = document.body;
     var myParent = document.getElementById("dropdown");
     var selectList = document.getElementById("mylist1");
-    // Create data = list of groups
-    //Create and append select list
-    /*var title1 = document.createElement("h6");
-    title1.className = "Nav_titles";
-    title1.innerHTML = "Championship";
-    myParent.appendChild(title1);
-    var selectList = document.createElement("select");
-    selectList.id = "mylist1";
-    selectList.name = "mylist1";
-    selectList.className = "dropdowns";
-    selectList.setAttribute("onchange", "populate(this.id, 'mylist2')");
-    myParent.appendChild(selectList); 
-
-    var title2 = document.createElement("h6");
-    title2.className = "Nav_titles";
-    title2.innerHTML = "Season";
-    myParent.appendChild(title2);
-    var selectList2 = document.createElement("select");
-    selectList2.id = "mylist2";
-    selectList2.name = "mylist2";
-    selectList2.className = "dropdowns";
-    selectList2.setAttribute("onchange", "populate2('mylist1', this.id, 'mylist3')");
-    myParent.appendChild(selectList2);*/
-    
-    /*var title3 = document.createElement("h6");
-    title3.className = "Nav_titles";
-    title3.innerHTML = "Team";
-    myParent.appendChild(title3);
-    var selectList3 = document.createElement("select");
-    selectList3.id = "mylist3";
-    selectList3.name = "mylist3";
-    selectList3.className = "dropdowns";
-    selectList3.setAttribute("onchange", "updateData('mylist2', this.id)");
-    myParent.appendChild(selectList3);*/
 
     var option1 = document.createElement("option");
     option1.value = "Choose a League";
@@ -240,7 +180,7 @@ function updateData(mySeason, myTeam) {
         var lastResult = ["Res1", "Res2", "Res3", "Res4", "Res5", "Res6"];
         lastResult.forEach(function(Res, index){
             if(data[data.length -1 -index] == undefined){
-                document.getElementById(Res).innerHTML = "NA";
+                document.getElementById(Res).innerHTML = "-";
                 document.getElementById(Res).className = "ResNA";
             } else {
                 if(data[data.length -1 -index]["Outcome"] == "Win"){
@@ -253,7 +193,7 @@ function updateData(mySeason, myTeam) {
                     document.getElementById(Res).innerHTML = "L";
                     document.getElementById(Res).className = "ResL";
                 } else {
-                    document.getElementById(Res).innerHTML = "NA";
+                    document.getElementById(Res).innerHTML = "-";
                     document.getElementById(Res).className = "ResNA";
                 }
             }  
