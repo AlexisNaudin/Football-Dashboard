@@ -1,6 +1,6 @@
 var gCount = 0
 
-d3.csv("https://raw.githubusercontent.com/AlexisNaudin/Football-Dashboard/master/backend/Football_DB/Teams_Result_DB.csv?token=AIAUCJLW5RRWYVAQYBOUICS6SCDGM").then(function(datad3) {
+d3.csv("https://raw.githubusercontent.com/AlexisNaudin/Football-Dashboard/master/backend/Football_DB/Teams_Result_DB.csv").then(function(datad3) {
     console.log(datad3[0]);
   });
 var teams_div_season = [];

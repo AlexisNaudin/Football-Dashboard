@@ -1,47 +1,142 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Football Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="./node_modules/c3/c3.css" rel="stylesheet">
-    <script src="./node_modules/d3/dist/d3.min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="./node_modules/c3/c3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.0.0.js" crossorigin="anonymous"></script>
+    <head>
+        <title> Dashboard Layout </title>
+        <link href="https://rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.css" integrity="sha256-6keM3+sDUFwuiB+tXRq/HV8tqQYlvarrsoWkx53dSgY=" crossorigin="anonymous" />
+        <link rel = "stylesheet" type = text/css  href = "./frontend/dashboard_layout.css" />
+
+    </head>
+    <body>
+        <div id = "Container">
+            <div id = "Left">
+                <div id = "Header">
+                    <div id = "Team_header">
+                        <h2 id = "Team_Name"></h2>
+                    </div>
+                    <div id = "Team_Ranking">
+                        <p>Ranking</p>
+                        <h3 id = "Team_Rank"></h3>
+                        <svg id = "List_icon" class="bi bi-list-ol" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M5 11.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+                            <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 01-.492.594v.033a.615.615 0 01.569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 00-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z"/>
+                          </svg>
+                    </div>
+                </div>
+                <div id = "Navigation">
+                    <div id = "dropdown" class = dropdown>
+                        <h6 class = "Nav_titles">Championship</h6>
+                        <select id = 'mylist1' name = 'mylist1' class = "dropdowns" onchange="populate(this.id, 'mylist2')">
+                        
+                        </select>  
+
+                        <h6 class = "Nav_titles">Season</h6>
+                        <select id = 'mylist2' name = 'mylist2' class = "dropdowns" onchange="populate2('mylist1', this.id, 'mylist3')">
+                        
+                        </select>  
+
+                        <h6 class = "Nav_titles">Team</h6>
+                        <select id = 'mylist3' name = 'mylist3' class = "dropdowns" onchange="updateData('mylist2', this.id)">
+                        
+                        </select>      
+                    </div>
+                </div> 
+
+                <div class="text" id = "Info">
+                    <div id="Last_results">
+                        <div id = "Res1"></div>
+                        <div id = "Res2"></div>
+                        <div id = "Res3"></div>
+                        <div id = "Res4"></div>
+                        <div id = "Res5"></div>
+                        <div id = "Res6"></div>
+                    </div>
+                    <div id="Result_freq">
+                        <div id="Wins" class="Result_box">
+                            <h6>Wins</h6>
+                            <h4 id = "nbWins"></h4>
+                            <p id = "pctWins"></p>
+                        </div>
+                        <div id="Draws" class="Result_box">
+                            <h6>Draws</h6>
+                            <h4 id = "nbDraws"></h4>
+                            <p id = "pctDraws"></p>
+                        </div>
+                        <div id="Losses" class="Result_box">
+                            <h6>Losses</h6>
+                            <h4 id = "nbLosses"></h4>
+                            <p id = "pctLosses"></p>
+                        </div>
+                    </div>
+
+                    <div id = "Stats">
+                        <div id = "Goals">
+                            <div id="Goals_scored" class="Stats_box">
+                                <h6>Goals Scored</h6>
+                                <h4 id = "nb_Goals_scored"></h4>
+                            </div>
+                            <div id="Goals_conceeded" class="Stats_box">
+                                <h6>Goals Conceeded</h6>
+                                <h4 id = "nb_Goals_conceeded"></h4>
+                            </div>
+                        </div>
+                        <div id = "Shots">
+                            <div id="Avg_shots" class="Stats_box">
+                                <h6>Average Shots per Game</h6>
+                                <h4 id = "Avg_shots_per_game"></h4>
+                            </div>
+                            <div id="Avg_shots_target" class="Stats_box">
+                                <h6>Average Shots on Target per Game</h6>
+                                <h4 id = "Avg_shots_target_per_game"></h4>
+                            </div>
+                        </div>
+                        <div id = "additional_stats">
+                            <div id="Corners" class="small_box">
+                                <h6>Average Corners</h6>
+                                <h5 id = "Avg_corner_per_game"></h5>
+                            </div>
+                            <div id="Yellow_cards" class="small_box">
+                                <h6>Yellow cards</h6>
+                                <h5 id = "nbYellow"></h5>
+                            </div>
+                            <div id="Red_cards" class="small_box">
+                                <h6>Red cards</h6>
+                                <h5 id = "nbRed"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "Right">
+                <div id = "Chart1"> 
+         
+                </div>
+                <div id = "Chart2"> 
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    <!-- D3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
 
-  </head>
-  <body>
-    <p>This is my <strong>Football Dashboard</strong> </p>
-    <div id="Chart1">
+    <!-- C3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.15/c3.min.js" integrity="sha256-c8Se556pPduNURww1xPQduyWV1LI/ARRt61o6LQreGw=" crossorigin="anonymous"></script>
 
-    </div>
-<!--
-    <div id="test">
-      <select id="editable-select">
-        <option>Alfa Romeo</option>
-        <option>Audi</option>
-        <option>BMW</option>
-        <option>Citroen</option>
-      </select>
-    </div>
--->
-    <div id = "dropdown"> 
-      <!--
-      <h3>Test for navigation dropdown list</h3>
-      <select id="mylist1", name="mylist1", onchange="populate(this.id, 'mylist2')"></select>
-      </hr>
-      <h4>Division</h4>
-      <select id="mylist2", name="mylist2"></select>
-      </hr>
-      <h4>Choose your team</h4>
-      <select id="mylist3", name="mylist3"></select>
-    -->
-  </div>
-</body>
-    <script src="./frontend/myScript.js"></script> 
+
+    <script src="./frontend/myScript.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script>
-      $('#editable-select').editableSelect();
-  </script>
+       // $('#editable-select').editableSelect();
+
+    </script>
 </html>
