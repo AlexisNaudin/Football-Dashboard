@@ -1,10 +1,7 @@
 var gCount = 0
 
-d3.csv("https://raw.githubusercontent.com/AlexisNaudin/Football-Dashboard/master/backend/Football_DB/Teams_Result_DB.csv").then(function(datad3) {
-    console.log(datad3[0]);
-  });
 var teams_div_season = [];
-$.get("/data", function(data, status){
+d3.csv("https://raw.githubusercontent.com/AlexisNaudin/Football-Dashboard/master/backend/Football_DB/Teams_Result_DB.csv").then(function(data){
     
     var Division = [];
         for(var i=0; i<data.length; i++){
@@ -71,6 +68,9 @@ $.get("/data", function(data, status){
 
 });
 
+
+
+////// FUNCTIONS /////
 
 function populate(l1, l2){
     var l1 = document.getElementById(l1);
@@ -174,7 +174,7 @@ function updateData(mySeason, myTeam) {
     var Team_rank = [];
     var Results = [];
 
-    $.get("/data", function(data, status){
+    d3.csv("https://raw.githubusercontent.com/AlexisNaudin/Football-Dashboard/master/backend/Football_DB/Teams_Result_DB.csv").then(function(data){
         data = data.filter(x => x.Team === myTeam && x.Season === mySeason);
         Team_rank = data[data.length-1]["ranking"];
 
