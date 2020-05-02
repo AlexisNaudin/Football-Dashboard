@@ -2,6 +2,7 @@
 #The arguments are the dataset and a Boolean for saving the file as CSV or not
 
 ComputeRanking <- function(db, saveCSV){
+  #db <- CleanDB
   teams <- as.character(unique(db$HomeTeam))
   teams <- teams[teams != ""]
   
@@ -10,14 +11,12 @@ ComputeRanking <- function(db, saveCSV){
   Div <- c()
   Season <- c()
   Date <- c()
-  Matchday <- c()
-  MD_when_played <- c()
   GF <- c()
   GA <- c()
   
   for(t in teams) {
     df <- db %>% filter(HomeTeam == t | AwayTeam == t) %>%
-      select("Div", "Matchday", "MD_when_played", "Date", "HomeTeam",
+      select("Div", "Date", "HomeTeam",
              "AwayTeam", "Season", "FTR", "FTHG", "FTAG")
     Result <- c()
     Division <- c()
@@ -54,9 +53,6 @@ ComputeRanking <- function(db, saveCSV){
       Division[i] <- df$Div[i]
       Seas[i] <- df$Season[i]
       Date2[i] <- df$Date[i]
-      MD[i] <- df$Matchday[i]
-      MD_played[i] <- df$MD_when_played[i]
-      
     }
     
     No <- match(t, teams)
@@ -70,8 +66,6 @@ ComputeRanking <- function(db, saveCSV){
     Div[[No]] <- Division
     Season[[No]] <- Seas
     Date[[No]] <- Date2
-    Matchday[[No]] <- MD
-    MD_when_played[[No]] <- MD_played
     GF[[No]] <- GFor
     GA[[No]] <- GAga
     
@@ -87,20 +81,16 @@ ComputeRanking <- function(db, saveCSV){
   Div <- unlist(Div, recursive = TRUE, use.names = TRUE)
   Season <- unlist(Season, recursive = TRUE, use.names = TRUE)
   Date <- unlist(Date, recursive = TRUE, use.names = TRUE)
-  Matchday <- unlist(Matchday, recursive = TRUE, use.names = TRUE)
-  MD_when_played <- unlist(MD_when_played, recursive = TRUE, use.names = TRUE)
   GF <- unlist(GF, recursive = TRUE, use.names = TRUE)
   GA <- unlist(GA, recursive = TRUE, use.names = TRUE)
   
-  Finaldf <- data.frame(cbind(Div, Season, Date, Matchday, MD_when_played, Team, Outcome, GF, GA))
+  Finaldf <- data.frame(cbind(Div, Season, Date, Team, Outcome, GF, GA))
   
   Finaldf$Team <- as.character(Finaldf$Team)
   Finaldf$Outcome <- as.character(Finaldf$Outcome)
   Finaldf$Date <- as_date(as.numeric(as.character(Finaldf$Date)))
   Finaldf$GF <- as.numeric(as.character(Finaldf$GF))
   Finaldf$GA <- as.numeric(as.character(Finaldf$GA))
-  Finaldf$Matchday <- as.numeric(as.character(Finaldf$Matchday))
-  Finaldf$MD_when_played <- as.numeric(as.character(Finaldf$MD_when_played))
   Finaldf$Div <- as.character(Finaldf$Div)
   Finaldf$Season <- as.character(Finaldf$Season)
   
@@ -109,8 +99,6 @@ ComputeRanking <- function(db, saveCSV){
   
   Divisions <- unique(Finaldf$Div)
   Seasons <- unique(Finaldf$Season)
-  Matchdays_played <- sort(unique(Finaldf$MD_when_played), decreasing = F)
-  
   
   Ranking_stats <- data.frame()
   for (t in teams) {

@@ -19,10 +19,11 @@ library(zoo)
 # 
 # data(package="engsoccerdata")  
 
-years <- c("20152016", "20162017", "20172018", "20182019", "20192020")
+years <- c("20152016", "20162017", "20172018", "20182019")
 chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1")
 newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1")
 
+# Load the csv for each league and each season:
 n <- 0
 for (c in chpship) {
   for (y in years) {
@@ -194,6 +195,8 @@ for (c in chpship) {
 
 ############
 
+
+# For each dataset from the year 2019-2020, remove the column "Time"
 n <- 0
 list_20192020 <- list()
 for (c in newchpship) {
@@ -206,6 +209,7 @@ for (c in newchpship) {
 
 list_20192020 <- lapply(list_20192020, function(df) { select(df, -Time) })
 
+# Apply data.frame format for datasets from the season 2019-2020
 n <- 0
 for (c in newchpship) {
     n <- n + 1
@@ -214,6 +218,7 @@ for (c in newchpship) {
     assign(newname, as.data.frame(list_20192020[[tempname]]))
 }
 
+# For each dataset, remove the column "Referee"
 list_season <- c()
 n <- 0
 for (c in newchpship) {
@@ -231,7 +236,7 @@ for (c in newchpship) {
   }
 }
 
-
+# Remove some columns related to betting odds
 list_season <- lapply(list_season, function(df) {
   df <- df[,c(1:24)]
 })
@@ -273,22 +278,7 @@ ResultsDB$Season[as.character(ResultsDB$Date) > "2018-07-01" & as.character(Resu
 ResultsDB$Season[as.character(ResultsDB$Date) > "2019-07-01" & as.character(ResultsDB$Date) < "2020-06-31"] <- "20192020"
 
 
-# Bun1_Ranking <- read.csv("Bun1Ranking.csv", sep = ";")
-# Bun1_Ranking$Div <- "D1"
-# Ch_Ranking <- read.csv("ChRanking.csv", sep = ";")
-# Ch_Ranking$Div <- "E1"
-# L1_Ranking <- read.csv("L1Ranking.csv", sep = ";")
-# L1_Ranking$Div <- "F1"
-# Liga_Ranking <- read.csv("LigaRanking.csv", sep = ";")
-# Liga_Ranking$Div <- "SP1"
-# PL_Ranking <- read.csv("PLRanking.csv", sep = ";")
-# PL_Ranking$Div <- "E0"
-# SerieA_Ranking <- read.csv("SerieARanking.csv", sep = ";")
-# SerieA_Ranking$Div <- "I1"
-
-# RankingDB <- rbind.data.frame(Bun1_Ranking, Ch_Ranking, PL_Ranking, L1_Ranking, Liga_Ranking, SerieA_Ranking)
-# RankingDB$Season <- as.character(RankingDB$Season)
-
+# Rename and normalise teams' name
 ResultsDB$HomeTeam <- as.character(ResultsDB$HomeTeam)
 ResultsDB$AwayTeam <- as.character(ResultsDB$AwayTeam)
 ResultsDB$HomeTeam[ResultsDB$HomeTeam == "Wolves"] <- "Wolverhampton"
@@ -334,85 +324,6 @@ ResultsDB$AwayTeam[ResultsDB$AwayTeam == "Betis"] <- "Betis Sevilla"
 ResultsDB$HomeTeam[ResultsDB$HomeTeam == "West Brom"] <- "West Bromwich"
 ResultsDB$AwayTeam[ResultsDB$AwayTeam == "West Brom"] <- "West Bromwich"
 
-# RankingDB$Team <- as.character(RankingDB$Team)
-# RankingDB$Team[RankingDB$Team == "Munich"] <- "Bayern Munich"
-# RankingDB$Team[RankingDB$Team == "Mayence"] <- "Mainz"
-# RankingDB$Team[RankingDB$Team == "Berlin"] <- "Hertha"
-# RankingDB$Team[RankingDB$Team == "Wolfsbourg"] <- "Wolfsburg"
-# RankingDB$Team[RankingDB$Team == "Cologne"] <- "FC Koln"
-# RankingDB$Team[RankingDB$Team == "Hambourg"] <- "Hamburg"
-# RankingDB$Team[RankingDB$Team == "Augsbourg"] <- "Augsburg"
-# RankingDB$Team[RankingDB$Team == "Brême"] <- "Werder Bremen"
-# RankingDB$Team[RankingDB$Team == "Francfort"] <- "Ein Frankfurt"
-# RankingDB$Team[RankingDB$Team == "Hanovre"] <- "Hannover"
-# RankingDB$Team[RankingDB$Team == "Fribourg"] <- "Freiburg"
-# RankingDB$Team[RankingDB$Team == "M'Gladbach"] <- "M'gladbach"
-# RankingDB$Team[RankingDB$Team == "Düsseldorf"] <- "Fortuna Dusseldorf"
-# RankingDB$Team[RankingDB$Team == "Nuremberg"] <- "Nurnberg"
-# RankingDB$Team[RankingDB$Team == "Hertha BSC"] <- "Hertha"
-# RankingDB$Team[RankingDB$Team == "Un. Berlin"] <- "Union Berlin"
-# RankingDB$Team[RankingDB$Team == "Ipswich Town"] <- "Ipswich"
-# RankingDB$Team[RankingDB$Team == "Milton KD"] <- "Milton Keynes Dons"
-# RankingDB$Team[RankingDB$Team == "Saint-Étienne"] <- "St Etienne"
-# RankingDB$Team[RankingDB$Team == "St-Étienne"] <- "St Etienne"
-# RankingDB$Team[RankingDB$Team == "Málaga CF"] <- "Malaga"
-# RankingDB$Team[RankingDB$Team == "Espanyol Barcelone"] <- "Esp Barcelona"
-# RankingDB$Team[RankingDB$Team == "Deportivo La Corogne"] <- "La Coruna"
-# RankingDB$Team[RankingDB$Team == "D. La Corogne"] <- "La Coruna"
-# RankingDB$Team[RankingDB$Team == "At. Madrid"] <- "Ath Madrid"
-# RankingDB$Team[RankingDB$Team == "La Corogne"] <- "La Coruna"
-# RankingDB$Team[RankingDB$Team == "Málaga"] <- "Malaga"
-# RankingDB$Team[RankingDB$Team == "Man. City"] <- "Man City"
-# RankingDB$Team[RankingDB$Team == "Man. United"] <- "Man United"
-# RankingDB$Team[RankingDB$Team == "Bologne FC"] <- "Bologna"
-# RankingDB$Team[RankingDB$Team == "Carpi FC"] <- "Carpi"
-# RankingDB$Team[RankingDB$Team == "Chievo Vérone"] <- "Chievo Verona"
-# RankingDB$Team[RankingDB$Team == "Empoli FC"] <- "Empoli"
-# RankingDB$Team[RankingDB$Team == "Genoa CFC"] <- "Genoa"
-# RankingDB$Team[RankingDB$Team == "Hellas Vérone"] <- "Hellas Verona"
-# RankingDB$Team[RankingDB$Team == "SS Lazio"] <- "Lazio"
-# RankingDB$Team[RankingDB$Team == "SSC Naples"] <- "Napoli"
-# RankingDB$Team[RankingDB$Team == "US Palerme"] <- "Palermo"
-# RankingDB$Team[RankingDB$Team == "AS Rome"] <- "Roma"	
-# RankingDB$Team[RankingDB$Team == "US Sassuolo"] <- "Sassuolo"	
-# RankingDB$Team[RankingDB$Team == "Cagliari Calcio"] <- "Cagliari"	
-# RankingDB$Team[RankingDB$Team == "Crotone FC"] <- "Crotone"	
-# RankingDB$Team[RankingDB$Team == "Bénévent Calcio"] <- "Benevento"	
-# RankingDB$Team[RankingDB$Team == "Torino FC"] <- "Torino"	
-# RankingDB$Team[RankingDB$Team == "Parme"] <- "Parma"	
-# RankingDB$Team[RankingDB$Team == "US Lecce"] <- "Lecce"
-# RankingDB$Team[RankingDB$Team == "Parme Calcio"] <- "Parma"	
-# RankingDB$Team[RankingDB$Team == "Schalke"] <- "Schalke 04"
-# RankingDB$Team[RankingDB$Team == "Nîmes"] <- "Nimes"
-# RankingDB$Team[RankingDB$Team == "Paris"] <- "Paris SG"
-# RankingDB$Team[RankingDB$Team == "Leicester City"] <- "Leicester"
-# RankingDB$Team[RankingDB$Team == "Huddersfield Town"] <- "Huddersfield"
-# RankingDB$Team[RankingDB$Team == "ACF Fiorentina"] <- "Fiorentina"
-# RankingDB$Team[RankingDB$Team == "Atalanta Bergame"] <- "Atalanta"
-# RankingDB$Team[RankingDB$Team == "Udinese Calcio"] <- "Udinese"
-# RankingDB$Team[RankingDB$Team == "Juventus FC"] <- "Juventus"
-# RankingDB$Team[RankingDB$Team == "UC Sampdoria"] <- "Sampdoria"
-# RankingDB$Team[RankingDB$Team == "Frosinone Calcio"] <- "Frosinone"
-# RankingDB$Team[RankingDB$Team == "AC Fiorentina"] <- "Fiorentina"
-# RankingDB$Team[RankingDB$Team == "Rayo"] <- "Rayo Vallecano"
-# RankingDB$Team[RankingDB$Team == "Celta"] <- "Celta Vigo"
-# RankingDB$Team[RankingDB$Team == "Levante UD"] <- "Levante"
-
-### Test differences between teams in both DB
-# setdiff(DATABASE$HomeTeam, RankingDB$Team)
-# setdiff(RankingDB$Team, DATABASE$HomeTeam)
-
-# names(RankingDB)[names(RankingDB) == 'Team'] <- 'HomeTeam'
-# names(RankingDB)[names(RankingDB) == 'Matchday'] <- 'MD_when_played'
-
-# CleanDB <- merge(ResultsDB, RankingDB, by=c("Div", "HomeTeam", "Season", "MD_when_played"), all.x = T)
-# names(CleanDB)[names(CleanDB) == "Ranking"] <- "HomeTeamRank"
-# names(RankingDB)[names(RankingDB) == 'HomeTeam'] <- 'AwayTeam'
-# CleanDB <- merge(CleanDB, RankingDB, by=c("Div", "AwayTeam", "Season", "MD_when_played"), all.x = T)
-# names(CleanDB)[names(CleanDB) == "Ranking"] <- "AwayTeamRank"
-# 
-# names(RankingDB)[names(RankingDB) == 'AwayTeam'] <- 'Team'
-# names(RankingDB)[names(RankingDB) == 'MD_when_played'] <- 'Matchday'
 
 CleanDB <- ResultsDB
 
@@ -434,7 +345,7 @@ source("./computeRanking.R")
 
 # Launch the function specified in the above script. 
 # The CleanDB with saveCSV = TRUE are the only arguments.
-# Returns a dataframe with ranking for each date
+# Returns a dataframe with ranking for each date (might take a few minutes)
 Computed_Ranking <- ComputeRanking(CleanDB, TRUE)
 
 Computed_Ranking[, c("MD_when_played", "GF", "GA")] <- list(NULL)
@@ -647,7 +558,7 @@ Teams_Result_DB <- Teams_Result_DB[c("Div", "Season", "Date", "Team", "Matchday"
                                      "Goals_scored_HT", "Goals_against_HT", "Cum_Goals_scored",
                                      "Cum_Goals_against", "Cum_Wins", "Cum_Draws", "Cum_Losses", 
                                      "Outcome_Opp", "Goal_avg_Opp", "Cum_Goals_scored_Opp", "Cum_Goals_against_Opp",
-                                     "Cum_Wins_Opp", "Cum_Draws_Opp", "Cum_Losses_Opp", )]
+                                     "Cum_Wins_Opp", "Cum_Draws_Opp", "Cum_Losses_Opp" )]
 
 
 ### New variables
