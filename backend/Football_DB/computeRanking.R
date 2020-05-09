@@ -118,7 +118,7 @@ ComputeRanking <- function(db, saveCSV){
       Losses <- c()
       Played <- c()
       for (i in 1:nrow(df2)) {
-        if (i ==1) {
+        if (i == 1) {
           if (df2$Outcome[i] == "Win") {
             Points[i] <- 3
             Wins[i] <- 1
