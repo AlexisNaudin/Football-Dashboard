@@ -48,6 +48,7 @@ library(data.table)
 #   }
 # }
 
+
 years <- c("20192020")
 chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1")
 newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1")

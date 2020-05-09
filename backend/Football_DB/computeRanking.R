@@ -49,7 +49,6 @@ ComputeRanking <- function(db, saveCSV){
         GAga[i] <- NA
       }
       
-      
       Division[i] <- df$Div[i]
       Seas[i] <- df$Season[i]
       Date2[i] <- df$Date[i]
