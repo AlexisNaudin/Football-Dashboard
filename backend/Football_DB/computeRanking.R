@@ -72,7 +72,6 @@ ComputeRanking <- function(db, saveCSV){
     
     Res <- paste("Result", t, sep = "_")
     assign(Res, Result)
-    
   }
   
   Team <- unlist(Team, recursive = TRUE, use.names = TRUE)
