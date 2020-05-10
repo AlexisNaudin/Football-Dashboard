@@ -26,7 +26,6 @@ ComputeRanking <- function(db, saveCSV){
     MD_played <- c()
     GFor <- c()
     GAga <- c()
-    print(t)
     for (i in 1:nrow(df)) {
       if ((df$HomeTeam[i] == t & df$FTR[i] == 'H') | (df$AwayTeam[i] == t & df$FTR[i] == 'A')) {
         Result[i] <- 'Win'
@@ -55,7 +54,7 @@ ComputeRanking <- function(db, saveCSV){
     }
     
     No <- match(t, teams)
-    print(No)
+    print(paste(No, " ", t))
     
     #RepTeam <- rep(sub(" ", "_", t), nrow(df))
     RepTeam <- rep(t, nrow(df))

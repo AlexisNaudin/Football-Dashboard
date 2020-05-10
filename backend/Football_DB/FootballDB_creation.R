@@ -11,6 +11,15 @@ library(lubridate)
 library(zoo)
 library(data.table)
 
+###Create a log file
+Systime <- format(Sys.time(), "%Y%m%d_%H%M%S")
+filelocation <- paste0("C:/Users/pc/Desktop/Project/backend/Logs/", Systime, "_Log_File_Update.txt")
+# Open Log file
+filelocation <- file(filelocation, open="wt")
+sink(filelocation, type="output")
+sink(filelocation, type="message")
+
+print("------------------Process started----------------------")
 
 ### Historical Results
 # library(devtools)
@@ -24,18 +33,6 @@ library(data.table)
 # chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1")
 # newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1")
 # 
-# ### Load the csv for each league and each season:
-# n <- 0
-# for (c in chpship) {
-#   for (y in years) {
-#     n <- n + 1
-#     newname <- paste0(newchpship[match(c, chpship)], "_", y)
-#     name <- paste0(c, "_", y, ".csv")
-#     tempname <- paste0("df", n)
-#     assign(newname, read.csv(name, sep = ";"))
-#   }
-# }
-
 # years2 <- c("1516", "1617", "1718", "1819")
 # n <- 0
 # for (c in chpship) {
@@ -48,6 +45,9 @@ library(data.table)
 #   }
 # }
 
+cat("############################################################## 
+    \n##################### SEASON 2019-2020 ####################### 
+    \n############################################################## \n")
 
 years <- c("20192020")
 chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1")
@@ -293,7 +293,6 @@ ResultsDB$Season <- NA
 # ResultsDB$Season[as.character(ResultsDB$Date) > "2017-07-01" & as.character(ResultsDB$Date) < "2018-06-31"] <- "20172018"
 # ResultsDB$Season[as.character(ResultsDB$Date) > "2018-07-01" & as.character(ResultsDB$Date) < "2019-06-31"] <- "20182019"
 ResultsDB$Season[as.character(ResultsDB$Date) > "2019-07-01" & as.character(ResultsDB$Date) < "2020-07-31"] <- "20192020"
-
 
 # Rename and normalise teams' name
 ResultsDB$HomeTeam <- as.character(ResultsDB$HomeTeam)
@@ -610,3 +609,8 @@ if (max(Teams_Result_DB$Date)>max(Last_Teams_Result_DB$Date)) {
 } else {
   print("------- Teams_Result_DB has NOT been updated ---------")
 }
+
+proc.time()
+sink()
+sink(type="message")
+close(filelocation)
