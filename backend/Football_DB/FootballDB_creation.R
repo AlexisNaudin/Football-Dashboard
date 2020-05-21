@@ -677,6 +677,8 @@ if (max(Teams_Result_DB$Date)>max(Last_Teams_Result_DB$Date)) {
   # To avoid to get duplicates we use unique(rbindlist())
   Teams_Result_DB <- unique(rbindlist(list(Last_Teams_Result_DB, Teams_Result_DB)), by = c("Date", "Team"))
   Teams_Result_DB <- as.data.frame(Teams_Result_DB)
+  Teams_Result_DB <- Teams_Result_DB[order(Teams_Result_DB$Div, Teams_Result_DB$Season, 
+                                           Teams_Result_DB$Team, Teams_Result_DB$Date),]
   write.table(Teams_Result_DB, "./Teams_Result_DB.csv", sep = ",", row.names = F)
   print("------- Teams_Result_DB has been updated ---------")
 } else {
