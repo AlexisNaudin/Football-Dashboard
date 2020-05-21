@@ -74,7 +74,7 @@ newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1", "L2", "Bun2", "Liga2", 
 
 PL_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/E0.csv")))
 Ch_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/E1.csv")))
-#Bun1_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/D1.csv")))
+Bun1_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/D1.csv")))
 SeA_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/I1.csv")))
 L1_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/F1.csv")))
 Liga_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/SP1.csv")))
@@ -85,7 +85,6 @@ Bun2_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk
 Erd_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/N1.csv")))
 LigaI_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/P1.csv")))
 
-Bun1_20192020 <- read.csv("D1.csv", sep = ";")
 
 # NOTES
 ############
