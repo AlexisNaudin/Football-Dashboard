@@ -67,14 +67,13 @@ print("------------------Process started----------------------")
 # n <- 0
 # list_20192020 <- list()
 # for (c in newchpship) {
-#   n <- n + 1
-#   newname <- paste0(c, "_20192020")
-#   tempname <- paste0("df", n)
-#   newname <- get(newname)
-#   list_20192020[[tempname]] <- newname
+#  n <- n + 1
+#  newname <- paste0(c, "_20192020")
+#  tempname <- paste0("df", n)
+#  newname <- get(newname)
+#  list_20192020[[tempname]] <- newname
 # }
-
-list_20192020 <- lapply(list_20192020, function(df) { select(df, -Time) })
+# list_20192020 <- lapply(list_20192020, function(df) { select(df, -Time) })
 
 
 cat("############################################################## 
@@ -85,18 +84,18 @@ years <- c("20202021")
 chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1", "F2", "D2", "SP2", "I2", "N1", "P1")
 newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1", "L2", "Bun2", "Liga2", "SeB", "Erd", "LigaI")
 
-#PL_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E0.csv")
-#Ch_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E1.csv")
-#Bun1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D1.csv")
-#SeA_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I1.csv")
-#L1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F1.csv")
-#Liga_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP1.csv")
-#SeB_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I2.csv")
-#L2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F2.csv")
-#Liga2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP2.csv")
-#Bun2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D2.csv")
-#Erd_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/N1.csv")
-#LigaI_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/P1.csv")
+# PL_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E0.csv")
+# Ch_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E1.csv")
+# Bun1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D1.csv")
+# SeA_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I1.csv")
+# L1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F1.csv")
+# Liga_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP1.csv")
+# SeB_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I2.csv")
+# L2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F2.csv")
+# Liga2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP2.csv")
+# Bun2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D2.csv")
+# Erd_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/N1.csv")
+# LigaI_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/P1.csv")
 
 PL_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/E0.csv")
 Ch_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/E1.csv")
