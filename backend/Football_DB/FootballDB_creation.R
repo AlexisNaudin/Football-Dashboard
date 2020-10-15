@@ -1,6 +1,6 @@
 rm(list = ls())
 
-setwd("C:/Users/pc/Desktop/Project/backend/Football_DB")
+setwd("C:/Users/Alexis/Documents/Project/backend/Football_DB")
 
 library(tidyverse)
 library(plyr)
@@ -13,7 +13,7 @@ library(data.table)
 
 ###Create a log file
 Systime <- format(Sys.time(), "%Y%m%d_%H%M%S")
-filelocation <- paste0("C:/Users/pc/Desktop/Project/backend/Logs/", Systime, "_Log_File_Update.txt")
+filelocation <- paste0("C:/Users/Alexis/Documents/Project/backend/Logs/", Systime, "_Log_File_Update.txt")
 # Open Log file
 filelocation <- file(filelocation, open="wt")
 sink(filelocation, type="output")
@@ -30,11 +30,11 @@ print("------------------Process started----------------------")
 # data(package="engsoccerdata")  
 
 # # Load five seasons of main leagues
-# years <- c("20142015", "20152016", "20162017", "20172018", "20182019")
+# years <- c("20142015", "20152016", "20162017", "20172018", "20182019", "20192020")
 # chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1")
 # newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1")
 # 
-# years2 <- c("1415", "1516", "1617", "1718", "1819")
+# years2 <- c("1415", "1516", "1617", "1718", "1819", "1920")
 # n <- 0
 # for (c in chpship) {
 #   for (y in years2) {
@@ -42,7 +42,7 @@ print("------------------Process started----------------------")
 #     newname <- paste0(newchpship[match(c, chpship)], "_", years[which(years2 == y)])
 #     name <- paste0("https://www.football-data.co.uk/mmz4281/", y, "/", c, ".csv")
 #     tempname <- paste0("df", n)
-#     assign(newname, read.csv(textConnection(getURL(name))))
+#     assign(newname, read.csv(name))
 #   }
 # }
 # 
@@ -51,7 +51,7 @@ print("------------------Process started----------------------")
 # chpship2nd <- c("F2", "D2", "SP2", "I2", "N1", "P1")
 # newchpship2nd <- c("L2", "Bun2", "Liga2", "SeB", "Erd", "LigaI")
 # 
-# years2 <- c("1718", "1819")
+# years2 <- c("1718", "1819", "1920")
 # n <- 0
 # for (c in chpship2nd) {
 #   for (y in years2) {
@@ -59,32 +59,57 @@ print("------------------Process started----------------------")
 #     newname <- paste0(newchpship2nd[match(c, chpship2nd)], "_", years2nd[which(years2 == y)])
 #     name <- paste0("https://www.football-data.co.uk/mmz4281/", y, "/", c, ".csv")
 #     tempname <- paste0("df", n)
-#     assign(newname, read.csv(textConnection(getURL(name))))
+#     assign(newname, read.csv(name))
 #   }
 # }
 
+# # For each dataset from the year 2019-2020, remove the column "Time"
+# n <- 0
+# list_20192020 <- list()
+# for (c in newchpship) {
+#   n <- n + 1
+#   newname <- paste0(c, "_20192020")
+#   tempname <- paste0("df", n)
+#   newname <- get(newname)
+#   list_20192020[[tempname]] <- newname
+# }
+
+list_20192020 <- lapply(list_20192020, function(df) { select(df, -Time) })
+
 
 cat("############################################################## 
-    \n##################### SEASON 2019-2020 ####################### 
+    \n##################### SEASON 2020-2021 ####################### 
     \n############################################################## \n")
 
-years <- c("20192020")
+years <- c("20202021")
 chpship <- c("E0", "E1", "F1", "SP1", "I1", "D1", "F2", "D2", "SP2", "I2", "N1", "P1")
 newchpship <- c("PL", "Ch", "L1", "Liga", "SeA", "Bun1", "L2", "Bun2", "Liga2", "SeB", "Erd", "LigaI")
 
-PL_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/E0.csv")))
-Ch_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/E1.csv")))
-Bun1_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/D1.csv")))
-SeA_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/I1.csv")))
-L1_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/F1.csv")))
-Liga_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/SP1.csv")))
-SeB_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/I2.csv")))
-L2_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/F2.csv")))
-Liga2_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/SP2.csv")))
-Bun2_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/D2.csv")))
-Erd_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/N1.csv")))
-LigaI_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.uk/mmz4281/1920/P1.csv")))
+#PL_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E0.csv")
+#Ch_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/E1.csv")
+#Bun1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D1.csv")
+#SeA_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I1.csv")
+#L1_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F1.csv")
+#Liga_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP1.csv")
+#SeB_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/I2.csv")
+#L2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/F2.csv")
+#Liga2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/SP2.csv")
+#Bun2_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/D2.csv")
+#Erd_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/N1.csv")
+#LigaI_20192020 <- read.csv("https://www.football-data.co.uk/mmz4281/1920/P1.csv")
 
+PL_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/E0.csv")
+Ch_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/E1.csv")
+Bun1_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/D1.csv")
+SeA_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/I1.csv")
+L1_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/F1.csv")
+Liga_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/12021/SP1.csv")
+SeB_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/I2.csv")
+L2_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/F2.csv")
+Liga2_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/12021/SP2.csv")
+Bun2_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/D2.csv")
+Erd_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/N1.csv")
+LigaI_20202021 <- read.csv("https://www.football-data.co.uk/mmz4281/2021/P1.csv")
 
 # NOTES
 ############
@@ -243,26 +268,26 @@ LigaI_20192020 <- read.csv(textConnection(getURL("https://www.football-data.co.u
 #   names(L2_20172018)[names(L2_20172018) == "AFKC"] <- "AF"
 # }
 
-# For each dataset from the year 2019-2020, remove the column "Time"
+# For each dataset from the year 2020-2021, remove the column "Time"
 n <- 0
-list_20192020 <- list()
+list_20202021 <- list()
 for (c in newchpship) {
   n <- n + 1
-  newname <- paste0(c, "_20192020")
+  newname <- paste0(c, "_20202021")
   tempname <- paste0("df", n)
   newname <- get(newname)
-  list_20192020[[tempname]] <- newname
+  list_20202021[[tempname]] <- newname
 }
 
-list_20192020 <- lapply(list_20192020, function(df) { select(df, -Time) })
+list_20202021 <- lapply(list_20202021, function(df) { select(df, -Time) })
 
-# Apply data.frame format for datasets from the season 2019-2020
+# Apply data.frame format for datasets from the season 2020-2021
 n <- 0
 for (c in newchpship) {
   n <- n + 1
-  newname <- paste0(c, "_20192020")
+  newname <- paste0(c, "_20202021")
   tempname <- paste0("df", n)
-  assign(newname, as.data.frame(list_20192020[[tempname]]))
+  assign(newname, as.data.frame(list_20202021[[tempname]]))
 }
 
 # For each dataset, add it to a list and remove the column "Referee"
@@ -357,7 +382,8 @@ ResultsDB$Season <- NA
 # ResultsDB$Season[as.character(ResultsDB$Date) > "2016-07-01" & as.character(ResultsDB$Date) < "2017-06-31"] <- "20162017"
 # ResultsDB$Season[as.character(ResultsDB$Date) > "2017-07-01" & as.character(ResultsDB$Date) < "2018-06-31"] <- "20172018"
 # ResultsDB$Season[as.character(ResultsDB$Date) > "2018-07-01" & as.character(ResultsDB$Date) < "2019-06-31"] <- "20182019"
-ResultsDB$Season[as.character(ResultsDB$Date) > "2019-07-01" & as.character(ResultsDB$Date) < "2020-07-31"] <- "20192020"
+# ResultsDB$Season[as.character(ResultsDB$Date) > "2019-07-01" & as.character(ResultsDB$Date) < "2020-08-08"] <- "20192020"
+ResultsDB$Season[as.character(ResultsDB$Date) > "2020-08-20" & as.character(ResultsDB$Date) < "2021-06-31"] <- "20202021"
 
 # Rename and normalise teams' name
 ResultsDB$HomeTeam <- as.character(ResultsDB$HomeTeam)
